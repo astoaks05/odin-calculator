@@ -104,3 +104,29 @@ function handleEquals() {
         updateDisplay();
     }
 }
+
+//event listeners
+
+document.querySelectorAll('.btn.number').forEach(button => {
+    button.addEventListener('click', () => {
+        const value = button.getAttribute('data-value');
+        if (value === '=') {
+            handleEquals();
+        } else {
+            handleNumber(value);        
+        }
+    });
+});
+
+document.querySelectorAll('.btn.operator').forEach(button => {
+    button.addEventListener('click', () => {
+        const value = button.getAttribute('data-value');
+        handleOperator(value);
+    });
+});
+
+document.querySelector('.btn.clear').addEventListener('click', clear);
+document.querySelector('.btn.backspace').addEventListener('click', backspace);
+
+//initialize display
+updateDisplay();
