@@ -76,18 +76,23 @@ function handleNumber(value) {
 function handleOperator(op) {
     if (firstNumber === null) {
         firstNumber = parseFloat(currentInput);
-    } else if (operator) {
+        operator = op;
+        shouldResetDisplay = true;
+    } else if (!shouldResetDisplay) {
         const result = operate(operator, firstNumber, parseFloat(currentInput));
         if (typeof result === 'string') {
             currentInput = result;
         } else {
-            currentInput = result.toString();
-            firstNumber = result;
+            currentInput = Number(result.toFixed(8)).toString();
+            firstNumber = parseFloat(currentInput);
         }
+        operator = op;
+        shouldResetDisplay = true;
+        updateDisplay();
+    } else {
+        operator = op;
     }
-    operator = op;
-    shouldResetDisplay = true;
-    updateDisplay();
+    
 }
 
 function handleEquals() {
@@ -96,7 +101,7 @@ function handleEquals() {
         if (typeof result === 'string') {
             currentInput = result;
         } else {
-            currentInput = result.toString();
+            currentInput = Number((result.toFixed(8)).toString());
         }
         firstNumber = null;
         operator = null;
