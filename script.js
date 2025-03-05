@@ -96,7 +96,7 @@ function handleOperator(op) {
 }
 
 function handleEquals() {
-    if (firstNumber !== null && operator) {
+    if (firstNumber !== null && operator && !shouldResetDisplay) {
         const result = operate(operator, firstNumber, parseFloat(currentInput));
         if (typeof result === 'string') {
             currentInput = result;
