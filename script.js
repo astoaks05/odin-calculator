@@ -64,6 +64,11 @@ function backspace() {
 }
 
 function handleNumber(value) {
+    // Check if value is a decimal point and if one already exists
+    if (value === '.' && currentInput.includes('.')) {
+        return; // Ignore additional decimal points
+    }
+
     if (shouldResetDisplay) {
         currentInput = value;
         shouldResetDisplay = false;
