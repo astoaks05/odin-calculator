@@ -133,5 +133,40 @@ document.querySelectorAll('.btn.operator').forEach(button => {
 document.querySelector('.btn.clear').addEventListener('click', clear);
 document.querySelector('.btn.backspace').addEventListener('click', backspace);
 
-//initialize display
+// Initialize display
 updateDisplay();
+
+// Keyboard support
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+
+    // Number keys
+    if (/^[0-9]$/.test(key)) {
+        handleNumber(key);
+    }
+
+    // Operator keys
+    else if (key === '+' || key === '-' || key === '*' || key === '/') {
+        handleOperator(key);
+    }
+
+    // Equals and Enter key
+    else if (key === '=' || key === 'Enter') {
+        handleEquals();
+    }
+
+    // Decimal point
+    else if (key === '.') {
+        handleNumber(key);
+    }
+
+    // Clear (Escape or C)
+    else if (key === 'Escape' || key === 'c' || key === 'C') {
+        clear();
+    }
+
+    // Backspace
+    else if (key === 'Backspace') {
+        backspace();
+    }
+});
